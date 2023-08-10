@@ -10,4 +10,6 @@ import java.util.List;
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     @Query("from Pessoa where nome = :nome")
     public List<Pessoa> findByNome(@Param("nome") final String nome);
+    @Query("from Pessoa where nome = :nome")
+    public Pessoa findByNomeUnique(@Param("nome") final String nome);
 }

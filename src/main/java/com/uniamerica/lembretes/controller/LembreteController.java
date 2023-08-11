@@ -1,10 +1,7 @@
 package com.uniamerica.lembretes.controller;
 
 import com.uniamerica.lembretes.DTO.LembreteDTO;
-import com.uniamerica.lembretes.DTO.PessoaDTO;
-import com.uniamerica.lembretes.entity.Pessoa;
 import com.uniamerica.lembretes.service.LembreteService;
-import com.uniamerica.lembretes.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +26,14 @@ public class LembreteController {
     public ResponseEntity<?> getAll() {
         try{
             return ResponseEntity.ok(service.findAll());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @GetMapping("/pessoa")
+    public ResponseEntity<?> getByNomePessoa(@RequestParam String nome){
+        try{
+            return ResponseEntity.ok(service.getByNomePessoa(nome));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

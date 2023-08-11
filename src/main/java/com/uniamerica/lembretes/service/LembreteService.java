@@ -3,6 +3,7 @@ package com.uniamerica.lembretes.service;
 import com.uniamerica.lembretes.DTO.LembreteDTO;
 import com.uniamerica.lembretes.DTO.PessoaDTO;
 import com.uniamerica.lembretes.entity.Lembrete;
+import com.uniamerica.lembretes.entity.Pessoa;
 import com.uniamerica.lembretes.repository.LembreteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,5 +64,11 @@ public class LembreteService {
         Lembrete lembreteById = repository.findById(id).orElse(null);
         Assert.notNull(lembreteById, String.format("Lembrete com ID %s não existe!", id));
         repository.deleteById(id);
+    }
+
+    public List<LembreteDTO> getByNomePessoa(String nome) {
+        PessoaDTO pessoa = pessoaService.getByNome(nome);
+        Assert.notNull(pessoa, String.format("Pessoa com nome %s não existe!", nome));
+        return repository.getByNomePessoa(nome).stream().map(this::toLembreteDTO).toList();
     }
 }

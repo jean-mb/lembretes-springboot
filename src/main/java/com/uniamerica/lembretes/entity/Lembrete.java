@@ -17,9 +17,10 @@ public class Lembrete {
     @Column(nullable = false)
     private String recado;
 
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn
-    @Column(nullable = false)
-    private Pessoa pessoa_id;
+    private Pessoa pessoa;
 
 }

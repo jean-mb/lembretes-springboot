@@ -19,14 +19,14 @@ public class LembreteDTO {
         this.recado = recado;
     }
 
-    public Pessoa getPessoa_id() {
-        return pessoa_id;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoa_id(Pessoa pessoa_id) {
-        this.pessoa_id = pessoa_id;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     private String recado;
-    private Pessoa pessoa_id;
+    private Pessoa pessoa;
 }

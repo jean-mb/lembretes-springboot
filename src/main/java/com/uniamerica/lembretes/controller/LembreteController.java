@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(name = "/lembretes")
+@RequestMapping("/lembretes")
 public class LembreteController {
 
     @Autowired

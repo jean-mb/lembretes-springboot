@@ -29,10 +29,10 @@ public class PessoaService {
     }
 
     @Transactional
-    public PessoaDTO post(Pessoa pessoa){
+    public PessoaDTO post(PessoaDTO pessoa){
         Assert.isTrue(pessoa.getNome().length() <= 50, "O nome da pessoa deve ter apenas 50 caracteres");
         Assert.isTrue(repository.findByNome(pessoa.getNome()).isEmpty(), String.format("A pessoa %s já existe!", pessoa.getNome()));
-        return toPessoaDTO(repository.save(pessoa));
+        return toPessoaDTO(repository.save(toPessoa(pessoa)));
     }
     public List<PessoaDTO> findAll(){
         return repository.findAll().stream().map(this::toPessoaDTO).toList();
@@ -59,6 +59,4 @@ public class PessoaService {
         Assert.notNull(pessoaById, String.format("Pessoa com ID %s não existe!", id));
         repository.deleteById(id);
     }
-
-
 }

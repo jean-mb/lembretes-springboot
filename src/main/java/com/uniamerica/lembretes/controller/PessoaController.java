@@ -16,7 +16,7 @@ public class PessoaController {
     private PessoaService service;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<?> post(@RequestBody Pessoa pessoa){
+    public ResponseEntity<?> post(@RequestBody PessoaDTO pessoa){
         try {
             return ResponseEntity.ok(service.post(pessoa));
         }catch (Exception e){
@@ -66,5 +66,4 @@ public class PessoaController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
 }

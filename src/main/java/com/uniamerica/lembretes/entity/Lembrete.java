@@ -10,13 +10,16 @@ public class Lembrete {
     @Id
     @GeneratedValue
     @Getter
+    @Setter
     private Long id;
 
     @Getter @Setter
+    @Column(nullable = false)
     private String recado;
 
     @ManyToOne
     @JoinColumn
+    @Column(nullable = false)
     private Pessoa pessoa_id;
 
 }

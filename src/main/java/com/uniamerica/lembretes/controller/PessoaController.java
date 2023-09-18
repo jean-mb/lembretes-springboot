@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaController {
@@ -16,54 +18,32 @@ public class PessoaController {
     private PessoaService service;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<?> post(@RequestBody PessoaDTO pessoa){
-        try {
-            return ResponseEntity.ok(service.post(pessoa));
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<PessoaDTO> post(@RequestBody PessoaDTO pessoa){
+        return ResponseEntity.ok(service.post(pessoa));
     }
 
     @GetMapping("/todos")
-    public ResponseEntity<?> getAll() {
-        try{
-            return ResponseEntity.ok(service.findAll());
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<List<PessoaDTO>> getAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<?> getById(@RequestParam Long id) {
-        try{
-            return ResponseEntity.ok(service.getById(id));
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    @GetMapping("/id/{id}")
+    public ResponseEntity<PessoaDTO> getById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
+
     @GetMapping("/nome")
-    public ResponseEntity<?> getByNome(@RequestParam String nome){
-        try{
-            return ResponseEntity.ok(service.getByNome(nome));
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<PessoaDTO> getByNome(@RequestParam String nome){
+        return ResponseEntity.ok(service.getByNome(nome));
     }
+
     @PutMapping("/editar")
-    public ResponseEntity<?> update(@RequestParam Long id, @RequestBody PessoaDTO pessoa){
-        try{
-            return ResponseEntity.ok(service.update(id, pessoa));
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<PessoaDTO> update(@RequestParam Long id, @RequestBody PessoaDTO pessoa){
+        return ResponseEntity.ok(service.update(id, pessoa));
     }
     @DeleteMapping("/deletar")
     public ResponseEntity<?> delete(@RequestParam Long id){
-        try{
-            service.delete(id);
-            return ResponseEntity.ok(String.format("Pessoa com ID %s deletado com sucesso!", id));
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        service.delete(id);
+        return ResponseEntity.ok(String.format("Pessoa com ID %s deletado com sucesso!", id));
     }
 }
